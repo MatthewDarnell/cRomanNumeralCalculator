@@ -4,6 +4,35 @@
 #include <parser.h>
 #include <check.h>
 
+
+//int stringToEnum(const char *string, enum NUMERALS *out)
+START_TEST(test_stringToEnum)
+{
+    printf("String to Enum Test(s)\n");
+
+    enum NUMERALS nums[3];
+    memset(nums, 0, 3 * sizeof(enum NUMERALS));
+    stringToEnum("MCM", nums);
+    ck_assert(nums[0] = 1000 && nums[1] == 100 && nums[2] == 1000);
+
+    memset(nums, 0, 3 * sizeof(enum NUMERALS));
+    stringToEnum("XVI", nums);
+    ck_assert(nums[0] = 10 && nums[1] == 5 && nums[2] == 1);
+
+    memset(nums, 0, 3 * sizeof(enum NUMERALS));
+    stringToEnum("IV", nums);
+    ck_assert(nums[0] = 1 && nums[1] == 5);
+
+    memset(nums, 0, 3 * sizeof(enum NUMERALS));
+    stringToEnum("DLM", nums);
+    ck_assert(nums[0] = 500 && nums[1] == 50 && nums[2] == 1000);
+
+    memset(nums, 0, 3 * sizeof(enum NUMERALS));
+    stringToEnum("IVX", nums);
+    ck_assert(nums[0] = 1 && nums[1] == 5 && nums[2] == 10);
+}
+END_TEST
+
 /*
     Naive parser (symbol validation, can't have more than 3 consecutive identical symbols)
 */
@@ -202,6 +231,7 @@ Suite *parsing_suite()
     s = suite_create("Parsing");
     tc = tcase_create("Core");
 
+    tcase_add_test(tc, test_stringToEnum);
     tcase_add_test(tc, test_naiveParse);
     tcase_add_test(tc, test_getChunkSize);
     tcase_add_test(tc, test_getChunkValue);
