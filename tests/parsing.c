@@ -133,6 +133,32 @@ START_TEST(test_analyze)
     }
 }
 END_TEST
+
+
+//int sumTwoNumbers(const char *one, const char *two)
+START_TEST(test_sum)
+{
+    printf("Roman Numeral Sum Test(s)\n");
+
+    ck_assert_int_eq(sumTwoNumbers( "MMMMCMXCIX" , "I" ), 5000 );
+    ck_assert_int_eq(sumTwoNumbers( "XCIX" , "CM" ), 999 );
+    ck_assert_int_eq(sumTwoNumbers( "XL" , "X" ), 50 );
+    ck_assert_int_eq(sumTwoNumbers( "MDC" , "XCVI" ), 1696 );
+    ck_assert_int_eq(sumTwoNumbers( "XXXVII" , "X" ), 47 );
+    ck_assert_int_eq(sumTwoNumbers( "XIV" , "MC" ), 1114 );
+    ck_assert_int_eq(sumTwoNumbers( "III" , "V" ), 8 );
+    ck_assert_int_eq(sumTwoNumbers( "XXV" , "L" ), 75 );
+    ck_assert_int_eq(sumTwoNumbers( "VII" , "XV" ), 22 );
+    ck_assert_int_eq(sumTwoNumbers( "X" , "X" ), 20 );
+    ck_assert_int_eq(sumTwoNumbers( "XLV" , "V" ), 50 );
+    ck_assert_int_eq(sumTwoNumbers( "MMXVI" , "V" ), 2021);
+    ck_assert_int_eq(sumTwoNumbers( "MCMXCI" , "IX" ), 2000 );
+    ck_assert_int_eq(sumTwoNumbers( "I" , "I" ), 2);
+    ck_assert_int_eq(sumTwoNumbers( "V" , "V" ), 10 );
+
+}
+END_TEST
+
 //Suite for parsing roman numeral values
 Suite *parsing_suite()
 {
@@ -146,6 +172,7 @@ Suite *parsing_suite()
     tcase_add_test(tc, test_getChunkSize);
     tcase_add_test(tc, test_getChunkValue);
     tcase_add_test(tc, test_analyze);
+    tcase_add_test(tc, test_sum);
     suite_add_tcase(s, tc);
 
     return s;

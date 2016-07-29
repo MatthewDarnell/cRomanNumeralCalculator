@@ -229,6 +229,23 @@ int analyze(const char *val)
     return retVal;
 }
 
+/*
+    @param one => roman numeral input
+    @param two => roman numeral input
+    @return    => the total value of the sum of both inputs
+*/
+int sumTwoNumbers(const char *one, const char *two)
+{
+    int dOne = analyze(one);
+    if(dOne < 0){
+        return -1;
+    }
+    int dTwo = analyze(two);
+    if (dTwo < 0){
+        return -1;
+    }
+    return dOne + dTwo;
+}
 void enumToChar(const enum NUMERALS n, char *out)
 {
     switch(n) {
