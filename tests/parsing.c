@@ -101,13 +101,18 @@ END_TEST
 START_TEST(test_analyze)
 {
     printf("Analyze Roman Numeral String Test(s)\n");
-    const int num_tests = 5;
+    const int num_tests = 10;
     const char *test_cases[10] = {
         "MCM",
         "MMMMCMXCIX",
         "IIII",
         "IIIVIXLCMMMIVI",
-        "MDCIX"
+        "MDCIX",
+        "LXX",
+        "CM",
+        "XCV",
+        "MCD",
+        "LII"
     };
 
     const int isValidCase[] = {
@@ -115,7 +120,12 @@ START_TEST(test_analyze)
         4999,
         -1,
         -1,
-        1609
+        1609,
+        70,
+        900,
+        95,
+        1400,
+        52
     };
     int i;
     for(i=0; i<num_tests; i++){

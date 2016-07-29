@@ -86,7 +86,7 @@ int getChunkSize(const enum NUMERALS *n, size_t len)
     if(len <= 0){
         return -1;
     }
-    int i, retVal = -1;
+    int retVal = -1;
     if(len >= 2){
         const enum NUMERALS a = n[0],
                             b = n[1];
@@ -186,7 +186,7 @@ int analyzeChunk(const enum NUMERALS *array, size_t len)
 
     int largestIndex = _getLargestValue(array, len);
 
-    fprintf(stderr, "%d\n", largestIndex);
+    //fprintf(stderr, "%d\n", largestIndex);
 
     if(largestIndex > 0){
         if( (array[largestIndex-1] != array[largestIndex]) && (array[largestIndex-1] > array[largestIndex] / 10)) //CM ok as C=1/10 of M, same with IX. VX, DM NOT ok. MM ok though
