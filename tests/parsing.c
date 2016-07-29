@@ -101,8 +101,8 @@ END_TEST
 START_TEST(test_analyze)
 {
     printf("Analyze Roman Numeral String Test(s)\n");
-    const int num_tests = 10;
-    const char *test_cases[10] = {
+    const int num_tests = 17;
+    const char *test_cases[17] = {
         "MCM",
         "MMMMCMXCIX",
         "IIII",
@@ -112,7 +112,14 @@ START_TEST(test_analyze)
         "CM",
         "XCV",
         "MCD",
-        "LII"
+        "LII",
+        "II",
+        "VV",
+        "XX",
+        "LL",
+        "CC",
+        "DD",
+        "MM"
     };
 
     const int isValidCase[] = {
@@ -125,7 +132,14 @@ START_TEST(test_analyze)
         900,
         95,
         1400,
-        52
+        52,
+        2,
+        -1,
+        20,
+        -1,
+        200,
+        -1,
+        2000
     };
     int i;
     for(i=0; i<num_tests; i++){
@@ -179,9 +193,10 @@ Suite *parsing_suite()
 }
 
 #ifdef PARSING
-int main()
+int main(int argc, char *argv[])
 {
     int dFailed = 0;
+
     Suite *suite;
     SRunner *sr;
 
@@ -191,6 +206,7 @@ int main()
     dFailed = srunner_ntests_failed(sr);
     srunner_free(sr);
 
+    //printf("%d\n", analyze(argv[1]));
 
     return dFailed==0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }

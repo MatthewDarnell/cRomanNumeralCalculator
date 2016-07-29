@@ -219,6 +219,9 @@ int analyze(const char *val)
         if(chunk_value > max_chunk_value){ //Subsequent chunks cannot be larger than previous ones
             return -1;
         }
+        if( (chunk_value == max_chunk_value) && (chunk_value == 5 || chunk_value == 50 || chunk_value == 500) ){ //If	the	numeral	is V, L or D you can't have more than one ("D" +	"D"	= "M" not “DD”)
+            return -1;
+        }
         max_chunk_value = chunk_value;
         //fprintf(stderr, "i=(%d)\tchunk_size= %d\tchunk_value = %d\n", i, chunk_size, chunk_value);
         retVal += chunk_value;
@@ -244,6 +247,7 @@ int sumTwoNumbers(const char *one, const char *two)
     if (dTwo < 0){
         return -1;
     }
+    //fprintf(stderr, "%s + %s = %d\n", one, two, dOne + dTwo);
     return dOne + dTwo;
 }
 void enumToChar(const enum NUMERALS n, char *out)
