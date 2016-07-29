@@ -25,12 +25,7 @@ int stringToEnum(const char *string, enum NUMERALS *out);
 int getChunkSize(const enum NUMERALS *n, size_t len);
 int getChunkValue(const enum NUMERALS *n, size_t len);
 int naiveParse(const char *numeral, size_t len);
-int analyzeChunk(const enum NUMERALS *array, size_t len);
 int analyze(const char *val);
-int parseNonFinalChunk(const char *string, enum NUMERALS *out);
-void enumToChar(const enum NUMERALS n, char *out);
-
 int addNumerals(const char *one, const char *two);
 int subtractNumerals(const char *one, const char *two);
-
 #endif //_H_PARSER_

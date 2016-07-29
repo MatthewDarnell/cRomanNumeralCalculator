@@ -175,7 +175,7 @@ int parseNonFinalChunk(const char *string, enum NUMERALS *out)
 /*
     @param array => the input array of NUMERALS
     @param len   => then length of array, max value is 3
-    @return      => the total value of the chunk. (i.e. MCM ret. 1900), < 0 if invalid array
+    @return      => the total value of the chunk. (i.e. IX ret. 9), < 0 if invalid array
 */
 int analyzeChunk(const enum NUMERALS *array, size_t len)
 {
@@ -185,8 +185,6 @@ int analyzeChunk(const enum NUMERALS *array, size_t len)
     int retVal = 0;
 
     int largestIndex = _getLargestValue(array, len);
-
-    //fprintf(stderr, "%d\n", largestIndex);
 
     if(largestIndex > 0){
         if( (array[largestIndex-1] != array[largestIndex]) && (array[largestIndex-1] > array[largestIndex] / 10)) //CM ok as C=1/10 of M, same with IX. VX, DM NOT ok. MM ok though
@@ -267,7 +265,6 @@ int subtractNumerals(const char *one, const char *two)
         return -1;
     }
     int subtractVal = dOne - dTwo;
-    //fprintf(stderr, "%s + %s = %d\n", one, two, dOne + dTwo);
     return subtractVal > 0 ? (subtractVal) : -1;
 }
 
@@ -300,3 +297,49 @@ void enumToChar(const enum NUMERALS n, char *out)
           return;
     }
 }
+
+
+#ifdef APPLICATION
+int main(int argc, char *argv[])
+{
+    if(argc < 4){
+        fprintf(stderr, "Usage: ./prog roman_numeral roman_numeral <add/subtract>\ne.g. ./prog MCM XV add\n");
+        return -1;
+    }
+
+    const char *one = argv[1],
+               *two = argv[2],
+               *op  = argv[3];
+    if(strcmp(op, "add") != 0 && strcmp(op, "subtract") != 0){
+        fprintf(stderr, "Usage: ./prog roman_numeral roman_numeral <add/subtract>\ne.g. ./prog MCM XV add\n");
+        return -2;
+    }
+
+    if(strlen(one) > 32 || strlen(two) > 32){
+        fprintf(stderr, "Value too large\n");
+        return -3;
+    }
+
+    int val = 0;
+
+    char result[128];
+    memset(result, 0, 128 * sizeof(char));
+    sprintf(result, "Invalid");
+
+    if(strcmp(op, "add") == 0){
+        val = addNumerals(one, two);
+        if(val > 0){
+            sprintf(result, "%d", val);
+        }
+        printf("<%s> + <%s> = <%s>\n", one, two, result );
+    }
+    else{
+        val = subtractNumerals(one, two);
+        if(val > 0){
+            sprintf(result, "%d", val);
+        }
+        printf("<%s> + <%s> = <%s>\n", one, two, result );
+    }
+    return 0;
+}
+#endif
