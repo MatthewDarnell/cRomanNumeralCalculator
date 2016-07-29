@@ -268,6 +268,92 @@ int subtractNumerals(const char *one, const char *two)
     return subtractVal > 0 ? (subtractVal) : -1;
 }
 
+/*
+    @param value => the int representing a value
+    @param out   => the character array into which the corresponding roman numeral sequence will be placed. MAKE SURE it is at least 128 characters
+*/
+int valueToRomanNumeralString(int value, char *out)
+{
+    memset(out, 0, 128 * sizeof(char));
+    if (value <= 0){
+        return -1;
+    }
+    int count = 0;
+    while(value >= 1000){
+        out[count++] = 'M';
+        value -= 1000;
+    }
+    if(value >= 900){
+        out[count++] = 'C';
+        out[count++] = 'M';
+        value -= 900;
+    }
+    if(value >= 500){
+        out[count++] = 'D';
+        value -= 500;
+        while(value >= 100){
+            out[count++] = 'C';
+            value -= 100;
+        }
+    }
+    if(value >= 400){ //400-499
+        out[count++] = 'C';
+        out[count++] = 'D';
+        value -= 400;
+    }
+    while(value >= 100){
+        out[count++] = 'C';
+        value -= 100;
+    }
+    //0-99
+    if(value >= 90){
+        out[count++] = 'X';
+        out[count++] = 'C';
+        value -= 90;
+    }
+    if (value >= 50) {
+        out[count++] = 'L';
+        value -= 50;
+        while(value >= 10){
+            out[count++] = 'X';
+            value -= 10;
+        }
+    }
+    if(value >= 40){ //40-49
+        out[count++] = 'X';
+        out[count++] = 'L';
+        value -= 40;
+    }
+    while(value >= 10){
+        out[count++] = 'X';
+        value -= 10;
+    }
+
+    if(value >= 9){
+        out[count++] = 'I';
+        out[count++] = 'X';
+        value -= 9;
+    }
+
+    if (value >= 5) {
+        out[count++] = 'V';
+        value -= 5;
+        while(value >= 1){
+            out[count++] = 'I';
+            value -= 1;
+        }
+    }
+    if(value >= 4){ //4
+        out[count++] = 'I';
+        out[count++] = 'V';
+        value -= 4;
+    }
+    while(value >= 1){
+        out[count++] = 'I';
+        value -= 1;
+    }
+    return 0;
+}
 
 void enumToChar(const enum NUMERALS n, char *out)
 {
@@ -303,7 +389,7 @@ void enumToChar(const enum NUMERALS n, char *out)
 int main(int argc, char *argv[])
 {
     if(argc < 4){
-        fprintf(stderr, "Usage: ./prog roman_numeral roman_numeral <add/subtract>\ne.g. ./prog MCM XV add\n");
+        fprintf(stderr, "Usage: ./cRomanNumeralCalculator roman_numeral roman_numeral <add/subtract>\ne.g. ./cRomanNumeralCalculator MCM XV add\n");
         return -1;
     }
 
@@ -311,7 +397,7 @@ int main(int argc, char *argv[])
                *two = argv[2],
                *op  = argv[3];
     if(strcmp(op, "add") != 0 && strcmp(op, "subtract") != 0){
-        fprintf(stderr, "Usage: ./prog roman_numeral roman_numeral <add/subtract>\ne.g. ./prog MCM XV add\n");
+        fprintf(stderr, "Usage: ./cRomanNumeralCalculator roman_numeral roman_numeral <add/subtract>\ne.g. ./cRomanNumeralCalculator MCM XV add\n");
         return -2;
     }
 
@@ -329,16 +415,16 @@ int main(int argc, char *argv[])
     if(strcmp(op, "add") == 0){
         val = addNumerals(one, two);
         if(val > 0){
-            sprintf(result, "%d", val);
+            valueToRomanNumeralString(val, result);
         }
         printf("<%s> + <%s> = <%s>\n", one, two, result );
     }
     else{
         val = subtractNumerals(one, two);
         if(val > 0){
-            sprintf(result, "%d", val);
+            valueToRomanNumeralString(val, result);
         }
-        printf("<%s> + <%s> = <%s>\n", one, two, result );
+        printf("<%s> - <%s> = <%s>\n", one, two, result );
     }
     return 0;
 }

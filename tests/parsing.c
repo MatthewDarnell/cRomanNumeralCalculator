@@ -177,6 +177,58 @@ START_TEST(test_analyze)
 }
 END_TEST
 
+//int valueToRomanNumeralString(int value, char *out)
+START_TEST(test_valueToRomanNumeralString)
+{
+    char output[128];
+    const int num_tests = 17;
+    const int test_cases[17] = {
+        1900,
+        4999,
+        4,
+        -1,
+        1609,
+        70,
+        900,
+        95,
+        1400,
+        52,
+        2,
+        10,
+        20,
+        100,
+        200,
+        566,
+        2000
+    };
+
+    const char * isValidCase[] = {
+        "MCM",
+        "MMMMCMXCIX",
+        "IV",
+        "",
+        "MDCIX",
+        "LXX",
+        "CM",
+        "XCV",
+        "MCD",
+        "LII",
+        "II",
+        "X",
+        "XX",
+        "C",
+        "CC",
+        "DLXVI",
+        "MM"
+    };
+    int i;
+    for(i=0; i<num_tests; i++){
+        valueToRomanNumeralString(test_cases[i], output);
+        ck_assert(strcmp(output, isValidCase[i]) == 0);
+    }
+}
+END_TEST
+
 START_TEST(test_addNumerals)
 {
     printf("Roman Numeral Addition Test(s)\n");
@@ -238,6 +290,7 @@ Suite *parsing_suite()
     tcase_add_test(tc, test_analyze);
     tcase_add_test(tc, test_addNumerals);
     tcase_add_test(tc, test_subtractNumerals);
+    tcase_add_test(tc, test_valueToRomanNumeralString);
     suite_add_tcase(s, tc);
 
     return s;

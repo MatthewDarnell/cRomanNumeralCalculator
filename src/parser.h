@@ -28,4 +28,5 @@ int naiveParse(const char *numeral, size_t len);
 int analyze(const char *val);
 int addNumerals(const char *one, const char *two);
 int subtractNumerals(const char *one, const char *two);
+int valueToRomanNumeralString(int value, char *out);
 #endif //_H_PARSER_

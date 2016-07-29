@@ -7,7 +7,8 @@ LIBS = -lcheck -lm -pthread -lrt
 TARGET = cRomanNumeralCalculator
 SRCS =	src/*.c
 TEST_SRCS = tests/*.c
-TEST_DIR = tests/
+TEST_DIR = tests
+TEST_TARGET = run_tests
 
 
 all: application tests
@@ -20,8 +21,8 @@ application: $(SRCS)
 
 
 parsing: $(SRCS)
-	 $(CC) $(SRCS) $(TEST_SRCS) $(CFLAGS) $(DEFS) -DPARSING $(INCLUDES) $(TEST_INCLUDES) $(LIBS) -o $(TEST_DIR)parsing
+	 $(CC) $(SRCS) $(TEST_SRCS) $(CFLAGS) $(DEFS) -DPARSING $(INCLUDES) $(TEST_INCLUDES) $(LIBS) -o $(TEST_DIR)/$(TEST_TARGET)
 
 
 clean:
-	rm $(TARGET) $(TEST_DIR)parsing
+	rm $(TARGET) $(TEST_DIR)/$(TEST_TARGET)
