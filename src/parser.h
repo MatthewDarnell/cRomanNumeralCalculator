@@ -30,5 +30,7 @@ int analyze(const char *val);
 int parseNonFinalChunk(const char *string, enum NUMERALS *out);
 void enumToChar(const enum NUMERALS n, char *out);
 
-int sumTwoNumbers(const char *one, const char *two);
+int addNumerals(const char *one, const char *two);
+int subtractNumerals(const char *one, const char *two);
+
 #endif //_H_PARSER_

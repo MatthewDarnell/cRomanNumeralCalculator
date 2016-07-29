@@ -237,7 +237,7 @@ int analyze(const char *val)
     @param two => roman numeral input
     @return    => the total value of the sum of both inputs
 */
-int sumTwoNumbers(const char *one, const char *two)
+int addNumerals(const char *one, const char *two)
 {
     int dOne = analyze(one);
     if(dOne < 0){
@@ -250,6 +250,28 @@ int sumTwoNumbers(const char *one, const char *two)
     //fprintf(stderr, "%s + %s = %d\n", one, two, dOne + dTwo);
     return dOne + dTwo;
 }
+
+/*
+    @param one => roman numeral input
+    @param two => roman numeral input
+    @return    => the total value of the difference of both inputs (one-two) , or -1 if negative number or invalid (0 is invalid)
+*/
+int subtractNumerals(const char *one, const char *two)
+{
+    int dOne = analyze(one);
+    if(dOne < 0){
+        return -1;
+    }
+    int dTwo = analyze(two);
+    if (dTwo < 0){
+        return -1;
+    }
+    int subtractVal = dOne - dTwo;
+    //fprintf(stderr, "%s + %s = %d\n", one, two, dOne + dTwo);
+    return subtractVal > 0 ? (subtractVal) : -1;
+}
+
+
 void enumToChar(const enum NUMERALS n, char *out)
 {
     switch(n) {
