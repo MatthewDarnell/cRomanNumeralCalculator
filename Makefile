@@ -1,4 +1,4 @@
-CC ?= clang
+CC ?= gcc
 CFLAGS = -Wall -O3
 DEFS =
 INCLUDES = -Isrc
